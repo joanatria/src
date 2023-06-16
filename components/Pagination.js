@@ -33,38 +33,6 @@ const PaginationText = styled.span`
   transform: translate(-50%, -50%);
 `;
 
-const PreviousButton = styled.button`
-  background: #fff;
-  border: none;
-  padding: 10px;
-  color: blue;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-  margin: 0 10px;
-  cursor: pointer;
-
-  &.disabled {
-    pointer-events: none;
-    box-shadow: none;
-    color: #999;
-  }
-`;
-
-const NextButton = styled.button`
-  background: #fff;
-  border: none;
-  padding: 10px;
-  color: blue;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-  margin: 0 10px;
-  cursor: pointer;
-
-  &.disabled {
-    pointer-events: none;
-    box-shadow: none;
-    color: #999;
-  }
-`;
-
 export default function Pagination({
   data,
   RenderComponent,
@@ -117,7 +85,6 @@ export default function Pagination({
         </div>
       )}
 
-      {/* show the next and previous buttons */}
       {data.length > dataLimit && (
         <PaginationContainer>
           <ArrowLeftOutlined

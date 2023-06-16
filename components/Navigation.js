@@ -14,6 +14,15 @@ import { useNavigate } from 'react-router-dom';
 const LogoutButton = styled(Button)`
   margin: 0 auto;
   display: block !important;
+  border: none;
+  background-color: transparent;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 14px;
+  color: black;
+  &&&:hover {
+    color: black !important;
+    background-color: transparent !important;
+  }
 `;
 
 const CartCount = styled.span`
@@ -40,7 +49,7 @@ const SearchContainer = styled.div`
   border: 0.25px solid white;
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 14px;
   margin-left: 25px;
   padding: 5px;
   cursor: pointer;
@@ -85,6 +94,7 @@ const AppleNavLinks = styled.ul`
 `;
 
 const AppleNavLink = styled.li`
+  margin-left: 10px;
   margin-right: 30px;
   margin-top: 20px; /* Adjust the margin-top value to move the links down */
 
@@ -232,15 +242,15 @@ function Navigation() {
           </form>
             {!user && (
               <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
+                <AppleNavLink><p >Login</p></AppleNavLink>
               </LinkContainer>
             )}
             {user && !user.isAdmin && (
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <ShoppingBagOutlinedIcon className="fas fa-shopping-cart"></ShoppingBagOutlinedIcon>
+                 <ShoppingBagOutlinedIcon className="fas fa-shopping-cart" style={{ marginTop: '10px' }}></ShoppingBagOutlinedIcon>
                   {user.cart?.count > 0 && (
-                    <CartCount id="cartcount" className="badge badge-warning">
+                    <CartCount id="cartcount" className="badge badge-warning" style={{ marginTop: '7px' }}>
                       {user.cart.count}
                     </CartCount>
                   )}
@@ -249,31 +259,28 @@ function Navigation() {
             )}
             {user && (
               <>
-               <Nav.Link ></Nav.Link> {/* Add this line */}
                 <Nav.Link style={{ display: 'none', position: 'relative' }}  onClick={handleToggleNotifications}>
                   <BellIcon className="fas fa-bell" ref={bellRef} data-count={unreadNotifications || null}></BellIcon>
                 </Nav.Link>
-                <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
-                  {user.isAdmin && (
-                    <LinkContainer to="/admin">
-                      <NavDropdown.Item>Admin Panel</NavDropdown.Item>
-                    </LinkContainer>
-                  )}
-                  {!user.isAdmin && (
-                    <>
-                      <LinkContainer to="/cart">
-                        <NavDropdown.Item>View my Cart</NavDropdown.Item>
+                {user && (
+                  <>
+                    {user.isAdmin ? (
+                      <LinkContainer to="/admin" style={{ fontSize: '14px' }}>
+                        <AppleNavLink><p >Admin Panel</p></AppleNavLink>
                       </LinkContainer>
-                      <LinkContainer to="/orders">
-                        <NavDropdown.Item>View my Orders</NavDropdown.Item>
-                      </LinkContainer>
-                    </>
-                  )}
-                  <NavDropdown.Divider />
-                  <LogoutButton onClick={handleLogout} className="logout-btn">
-                    Log Out
-                  </LogoutButton>
-                </NavDropdown>
+                    ) : (
+                      <>
+                        <LinkContainer to="/cart">
+                        <AppleNavLink><p >View my Cart</p></AppleNavLink>
+                        </LinkContainer>
+                        <LinkContainer to="/orders">
+                        <AppleNavLink><p >View my Orders</p></AppleNavLink>
+                        </LinkContainer>
+                      </>
+                    )}
+                    <LogoutButton onClick={handleLogout} className="logout-btn">Log Out</LogoutButton>
+                  </>
+                )}
               </>
             )}
           </Nav>

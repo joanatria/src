@@ -1,73 +1,76 @@
 import React from 'react';
 import { Badge, Card } from 'react-bootstrap';
-import LinkContainer from 'react-router-bootstrap/LinkContainer';
+import { LinkContainer } from 'react-router-bootstrap';
+import styled from 'styled-components';
+
+const StyledSimilarProductCard = styled(Card)`
+  width: 150px;
+  height: auto;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const StyledSimilarProductImgContainer = styled.div`
+  height: 0;
+  padding-bottom: 100%; /* Maintain aspect ratio */
+  position: relative;
+  overflow: hidden;
+`;
+
+const StyledSimilarProductImgWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+
+const StyledSimilarProductImg = styled(Card.Img)`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
+
+const StyledSimilarProductBody = styled(Card.Body)`
+  padding: 1rem;
+`;
+
+const StyledSimilarProductTitle = styled(Card.Title)`
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+`;
+
+const StyledSimilarProductCategory = styled(Badge)`
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  background-color: transparent;
+  color: black;
+`;
 
 function SimilarProduct({ _id, name, category, pictures }) {
   return (
-    <LinkContainer
-      to={`/product/${_id}`}
-      style={{ textDecoration: 'none' }}
-    >
-      <Card className="similar-product-card">
-        <div className="similar-product-img-container">
-          <Card.Img
-            variant="top"
-            className="similar-product-img"
-            src={pictures[0].url}
-          />
-        </div>
-        <Card.Body className="similar-product-body">
-          <Card.Title className="similar-product-title">{name}</Card.Title>
-          <Badge bg="warning" className="similar-product-category">
+    <LinkContainer to={`/product/${_id}`} style={{ textDecoration: 'none' }}>
+      <StyledSimilarProductCard>
+        <StyledSimilarProductImgContainer>
+          <StyledSimilarProductImgWrapper>
+            <StyledSimilarProductImg variant="top" src={pictures[0].url} />
+          </StyledSimilarProductImgWrapper>
+        </StyledSimilarProductImgContainer>
+        <StyledSimilarProductBody>
+          <StyledSimilarProductTitle>{name}</StyledSimilarProductTitle>
+          <StyledSimilarProductCategory bg="light" text="dark">
             {category}
-          </Badge>
-        </Card.Body>
-      </Card>
+          </StyledSimilarProductCategory>
+        </StyledSimilarProductBody>
+      </StyledSimilarProductCard>
     </LinkContainer>
   );
 }
 
 export default SimilarProduct;
-
-<style>
-  {`
-  .similar-product-card {
-    width: 100%;
-    height: 100%;
-    border: none;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .similar-product-card:hover {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .similar-product-img-container {
-    flex-grow: 1;
-    overflow: hidden;
-  }
-
-  .similar-product-img {
-    height: auto;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .similar-product-body {
-    padding: 1rem;
-  }
-
-  .similar-product-title {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .similar-product-category {
-    font-size: 0.9rem;
-    padding: 0.2rem 0.5rem;
-  }
-  `}
-</style>

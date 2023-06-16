@@ -23,13 +23,13 @@ const NavLinkCustom = styled(Nav.Link)`
   &&:hover,
   &&:focus,
   &&:active {
-    color: #000;
+    color: black !important;
     background-color: transparent !important;
     box-shadow: none !important;
     outline: 2px solid gray !important;
     font-weight: bold;
   }
-
+  
   &&:focus {
     outline-offset: -2px !important;
   }

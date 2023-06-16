@@ -164,7 +164,7 @@ const ProductPage = () => {
         </Col>
       </Row>
       <div className="my-4">
-        <h2>Similar Products</h2>
+        <h2>You might also like...</h2>
         <div className="d-flex justify-content-center align-items-center flex-wrap">
           <AliceCarousel
             mouseTracking
